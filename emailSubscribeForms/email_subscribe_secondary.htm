@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+<!--[if !mso]><!-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!--<![endif]-->
+<title>Frontier Airlines | Email Subscribe</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_reset.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_main4_20191218.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_email_subscribe_201912.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/banner_201912.css">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<main id="app" v-cloak>
+<header>
+<a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup"><img src="img/logo.png" alt="Frontier Airlines" class="logo" /></a>
+</header>
+<div class="wrapper">
+<div v-if="step === 1">
+<h1 class="signup">Sign Up Today</h1>
+<h2>Receive special deals on flights, hotels, and&nbsp;more.</h2>
+</div>
+<div v-if="step >= 2">
+<h1 class="signup">THANK YOU FOR SUBSCRIBING!</h1>
+<h2 class="marbtm20">Let’s learn a little more about&nbsp;you...</h2>
+<p class="center marbtm2em">No thanks, just take me to the <a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup">flyfrontier.com</a></p>
+</div>
+  
+  <div class="headline">
+    <a @click="step = 2">
+      <div v-if="step >= 3" class="cursor">
+      <h2 class="clickArea">Please tell us your name and birthday <span class="headline-arrow"></span></h2>
+    </div></a>
+    <a @click="step = 3">
+      <div v-if="step >= 4" class="cursor">
+      <h2>What is your language preference? <span class="headline-arrow"></span></h2>
+    </div></a>
+    <a @click="step = 4">
+      <div v-if="step >= 5" class="cursor">
+      <h2>Where is your home base? <span class="headline-arrow"></span></h2>
+    </div></a>
+    <a @click="step = 5">
+      <div v-if="step === 6" class="cursor">
+      <h2>What do you do for fun? (select all that apply) <span class="headline-arrow"></span></h2>
+    </div></a>
+  </div>
+  
+  <div class="bg-grey">
+    <div class="progress-bar" v-if="step >= 2">
+      <div class="progress-01" v-if="step === 2"><img src="img/plane.png"></div>
+      <div class="progress-02" v-if="step === 3"><img src="img/plane.png"></div>
+      <div class="progress-03" v-if="step === 4"><img src="img/plane.png"></div>
+      <div class="progress-04" v-if="step === 5"><img src="img/plane.png"></div>
+      <div class="progress-05" v-if="step === 6"><img src="img/plane.png"></div>
+    </div>
+  <div class="form-container">
+    
+  <form method="GET" action="" onsubmit="" class="form" id="prefForm">
+    <transition name="fadeIn" mode="out-in">
+    <div id="module-02" v-if="step === 2">
+      <h3>Please tell us your name and birthday</h3>
+      <div class="form-row">
+        <div class="paddrt16">
+          <img src="img/progress-01.png" alt="Tell us more about you!" class="progress" />
+        </div>
+        <div class="col-1">
+          <label for="firstName">First name</label>
+          <input type="text" name="firstName" v-model="custInfo.firstName" pattern="^[a-zA-Z0-9 -]*$" title="We can only accept alphanumeric characters" placeholder="Jane" :class="{'errorBorder': (redBorderFirstName)}"/>
+          <transition name="fadeIn">
+              <div v-if="nameErrors.length">
+                 <p class="error-message">We can only accept alphanumeric characters   
+                  </p>
+               </div>
+          </transition>
+        </div>
+        <div class="col-1">
+          <label for="lastName">Last name</label>
+          <input type="text" name="lastName" v-model="custInfo.lastName" pattern="^[a-zA-Z0-9 -]*$" title="We can only accept alphanumeric characters" placeholder="Smith" :class="{'errorBorder': (redBorderLastName)}"/>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+      <div class="form-row4 negmartp">
+        <div class="mblhd">&nbsp;
+        </div>
+        <div class="col-1">
+          <label for="dob">Date of birth</label><br />
+          <select id="" name="" v-model="custInfo.dobMM" class="select-dob" :onclick="maxDay()">
+          <option value="" disabled selected>MM</option>
+            <template v-for="mm in dobMM">
+              <option>{{mm}}</option>
+            </template>
+          </select>
+          <select id="" name="" v-model="custInfo.dobDD" class="select-dob">
+            <option value="" disabled selected>DD</option>
+              <template v-for="dd in dobDD">
+                <option>{{dd}}</option>
+              </template>
+          </select>
+          <select id="" name="" v-model="custInfo.dobYY" class="select-dob" :onclick="maxDay()">
+            <option value="" disabled selected>YYYY</option>
+              <template v-for="yy in dobYY">
+                <option>{{yy}}</option>
+              </template>
+          </select>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+      <div class="btn paddtp60 paddbtm90">
+        <button @click.prevent="checkName() ; nextName()" type="button" class="btn-next" id="next" value="next">NEXT</button>
+      </div>
+    </div>
+    </transition>
+
+    <transition name="fadeSlide" mode="out-in">
+    <div id="module-03" v-if="step === 3">
+      <h3>What is your language preference?</h3>
+      <div class="form-row5">
+        <div class="paddrt16">
+          <img src="img/progress-02.png" alt="On your way!" class="progress" />
+        </div>
+        <div class="col-1 margcenter">
+          <label for="language">Select language</label>
+              <select id="" name="" v-model="custInfo.language" class="select-arrow">
+              <option value="" disabled selected>select one</option>
+              <template v-for="language in preferredLanguage">
+              <option>{{language}}</option>
+              </template>
+              </select>
+        </div>
+        
+      </div>
+
+      <div class="btn paddtp32 paddbtm20">
+        <button @click.prevent="checkCity() ; next()" type="button" class="btn-next" id="next" value="next">NEXT</button>
+      </div>
+      <div class="btn paddbtm90">
+        <button @click.prevent="checkCity() ; back()" type="button" class="btn-back" id="back" value="back">BACK</button>
+      </div>
+    </div>
+    </transition>
+   
+    <transition name="fadeSlide" mode="out-in">
+    <div id="module-04" v-if="step === 4">
+      <h3>Where is your home base?</h3>
+      <div class="form-row">
+        <div class="paddrt16">
+          <img src="img/progress-02a.png" alt="On your way!" class="progress" />
+        </div>
+        <div class="col-1">
+          <label for="city">City</label>
+          <input type="text" name="city" v-model="custInfo.city" pattern="^[a-zA-Z0-9 -]*$" title="We can only accept alphanumeric characters" placeholder="Denver" :class="{'errorBorder': (redBorderCity)}"/>
+          <transition name="fadeIn">
+            <div v-if="cityErrors.length">
+            <p class="error-message">We can only accept alphanumeric characters</p>
+            </div>
+          </transition>
+        </div>
+
+        <div class="col-1">
+          <label for="state">State</label>
+          <select id="" name="" v-model="custInfo.state" class="select-arrow">
+          <option value="" disabled selected>&nbsp;</option>
+            <template v-for="state in preferredState">
+              <option>{{state}}</option>
+            </template>
+           </select>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+      <div class="form-row4 negmartp">
+        <div class="mblhd">&nbsp;
+        </div>
+        <div class="col-1">
+          <label for="prefAir">Preferred airport</label>
+          <select id="" name="" v-model="custInfo.prefAirport" class="select-arrow">
+          <option value="" disabled selected>select one</option>
+            <template v-for="airport in airportCodes">
+              <option>{{airport}}</option>
+            </template>
+                  </select>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+      <div class="btn paddtp60 paddbtm20">
+        <button @click.prevent="checkCity() ; next()" type="button" class="btn-next" id="next" value="next">NEXT</button>
+      </div>
+      <div class="btn paddbtm90">
+        <button @click.prevent="checkCity() ; back()" type="button" class="btn-back" id="back" value="back">BACK</button>
+      </div>
+    </div>
+    </transition>
+    
+    <transition name="fadeSlide" mode="out-in">
+    <div id="module-05" v-if="step === 5">
+      <h3>What do you do for fun? <span class="txt-sm">(select all that&nbsp;apply)</span></h3>
+      <div class="form-row2">
+        <div class="paddrt16">
+          <img src="img/progress-03.png" alt="Nice work!" class="progress" />
+        </div>
+        <div class="col-4">
+          <div class="checkbox">
+            <p class="p-notactive">Outdoor activities</p>
+            <input type="checkbox" class="checkboxWhat_item outdoor" value="" name="item" id="prefOutdoorActivities" v-model="custInfo.prefOutdoorActivities">
+              <label class="label_item" for="prefOutdoorActivities">&nbsp;</label>
+              <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkbox">
+            <p class="p-notactive">Dining</p>
+            <input type="checkbox" class="checkboxWhat_item dining" value="" name="item" id="prefDining" v-model="custInfo.prefDining">
+              <label class="label_item" for="prefDining">&nbsp;</label>
+              <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkbox">
+            <p class="p-notactive">Entertainment</p>
+            <input type="checkbox" class="checkboxWhat_item entertainment" value="" name="item" id="prefEntertainment" v-model="custInfo.prefEntertainment">
+              <label class="label_item" for="prefEntertainment">&nbsp;</label>
+              <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkbox">
+            <p class="p-notactive">Family</p>
+            <input type="checkbox" class="checkboxWhat_item family" value="" name="item" id="prefFamily1" v-model="custInfo.prefFamily1">
+              <label class="label_item" for="prefFamily1">&nbsp;</label>
+              <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkbox">
+            <p class="p-notactive">Ski</p>
+            <input type="checkbox" class="checkboxWhat_item ski" value="" name="item" id="prefSki" v-model="custInfo.prefSki">
+              <label class="label_item" for="prefSki">&nbsp;</label>
+              <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkbox">
+            <p class="p-notactive">Beach</p>
+            <input type="checkbox" class="checkboxWhat_item beach" value="" name="item" id="prefBeach" v-model="custInfo.prefBeach">
+              <label class="label_item" for="prefBeach">&nbsp;</label>
+              <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkbox">
+          <p class="p-notactive">Art & Culture</p>
+          <input type="checkbox" class="checkboxWhat_item other1" value="" name="item" id="prefArtCulture" v-model="custInfo.prefArtCulture">
+            <label class="label_item" for="prefArtCulture">&nbsp;</label>
+            <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+        </div>
+        <div class="checkbox">
+          <p class="p-notactive">Shopping</p>
+          <input type="checkbox" class="checkboxWhat_item other2" value="" name="item" id="prefShopping" v-model="custInfo.prefShopping">
+            <label class="label_item" for="prefShopping">&nbsp;</label>
+            <div class="check"><img src="img/icn-check.png" style="width:23px;" /></div>
+        </div>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+      <h3 class="h3-secondary">Why do you travel? <span class="txt-sm">(select all that&nbsp;apply)</span></h3>
+      <div class="form-row2">
+        <div class="mblhd">
+          &nbsp;
+        </div>
+        <div class="col-3">
+          <div class="checkboxWhy">
+            <p class="p-notactive">Business</p>
+            <input type="checkbox" class="checkboxWhy_item business" value="" name="item" id="prefBusiness" v-model="custInfo.prefBusiness">
+              <label class="label_item" for="prefBusiness">&nbsp;</label>
+              <div class="checkWhy"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkboxWhy">
+            <p class="p-notactive">Pleasure</p>
+            <input type="checkbox" class="checkboxWhy_item pleasure" value="" name="item" id="prefPleasure" v-model="custInfo.prefPleasure">
+              <label class="label_item" for="prefPleasure">&nbsp;</label>
+              <div class="checkWhy"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+          <div class="checkboxWhy">
+            <p class="p-notactive">Family</p>
+            <input type="checkbox" class="checkboxWhy_item family-2" value="" name="item" id="prefFamily2" v-model="custInfo.prefFamily2">
+              <label class="label_item" for="prefFamily2">&nbsp;</label>
+              <div class="checkWhy"><img src="img/icn-check.png" style="width:23px;" /></div>
+          </div>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+      <div class="btn paddtp60 paddbtm20">
+        <button @click.prevent="next()" type="button" class="btn-next" id="next" value="next">NEXT</button>
+      </div>
+      <div class="btn paddbtm90">
+        <button @click.prevent="back()" type="button" class="btn-back" id="back" value="back">BACK</button>
+      </div>
+    </div>
+    </transition>
+
+    <transition name="fadeSlide">
+    <div id="module-06" v-if="step === 6">
+      <h3>Tell us more about your preferences!</h3>
+      <div class="form-row2">
+        <div class="nospace-mbl">&nbsp;</div>
+        <div class="col-1 bg-white"><p class="center paddbtm8 paddltrt8">Choose the programs you are interested&nbsp;in</p></div>
+        <div class="nospace-mbl">&nbsp;</div>
+      </div>
+      <div class="form-row2">
+        <div class="paddrt16">
+          <img src="img/progress-04.png" alt="Almost there!" class="progress" />
+        </div>
+        <div class="col-2 bg-white">
+          <div class="col-1">
+            <div class="checkbox-pref">
+              <label for="prefDiscountDen">
+                <div>
+                  <img src="img/icn-program01a.png" alt="" class="icon-prog" />
+                  <p>Discount Den<sup>SM</sup></p>
+                  <p class="txt-sm">With a DISCOUNT DEN<sup>SM</sup> subscription you will have exclusive access to Frontier's LOWEST available fares. Better yet, the savings continue all year long! The more you fly, the more you save.</p>
+                </div>
+                <input type="checkbox" id="prefDiscountDen" v-model="custInfo.prefDiscountDen">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="checkbox-pref">
+              <label class="" for="prefBundleSave">
+                <div>
+                  <img src="img/icn-program02.png" alt="" class="icon-prog" />
+                  <p>Bundle &amp; Save</p>
+                  <p class="txt-sm">Missing all the extras in travel, but still want the best price possible? Now you have a real choice with Frontier's exclusive bundles- the WORKS<sup>sm</sup> bundle and the PERKS<sup>sm</sup> bundle!</p>
+                </div>
+                <input type="checkbox" id="prefBundleSave" v-model="custInfo.prefBundleSave">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="checkbox-pref">
+              <label for="prefFrontierMiles">
+                <div>
+                  <img src="img/icn-program03.png" alt="" class="icon-prog" />
+                  <p>Frontier Miles</p>
+                  <p class="txt-sm">Travel just got a whole lot more rewarding with our FRONTIER Miles frequent flyer program. That's because whether you spend a lot more or a little, FRONTIER Miles lets you earn 1 mile per 1 mile flown, so you can easily redeem miles for reward flights, reach Elite Status sooner and travel more than ever before!</p>
+                </div>
+                <input type="checkbox" id="prefFrontierMiles" v-model="custInfo.prefFrontierMiles">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="checkbox-pref">
+              <label for="prefFrontierMastercard">
+                <div>
+                  <img src="img/icn-program04.png" alt="" class="icon-prog" />
+                  <p>Frontier Airlines World Mastercard<sup>&reg;</sup></p>
+                  <p class="txt-sm">With every purchase you make on the Frontier Airlines World Mastercard, you're unlocking more miles, more rewards and more opportunities to travel the way you want!</p>
+                </div>
+                <input type="checkbox" id="prefFrontierMastercard" v-model="custInfo.prefFrontierMastercard">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mblhd">&nbsp;</div>
+      </div>
+
+      <div class="btn paddtp60 paddbtm20">
+        <button type="submit" form="prefForm" class="btn-submit" id="next" value="next">SUBMIT</button>
+      </div>
+      <div class="btn paddbtm90">
+        <button @click.prevent="back()" type="button" class="btn-back" id="back" value="back">BACK</button>
+      </div>
+  
+<!--These are all hidden inputs to write the variables captured to tables in RI-->
+  <!--Form data variable inputs-->
+  <input type="hidden" name="FIRST_NAME" :value="custInfo.firstName">
+  <input type="hidden" name="LAST_NAME" :value="custInfo.lastName">
+  <input type="hidden" name="CITY_" :value="custInfo.city">
+  <input type="hidden" name="STATE_" :value="custInfo.state">
+  <input type="hidden" name="PREF_HOME_AIRPORT" :value="custInfo.prefAirportToSave">
+  <input type="hidden" name="DATE_OF_BIRTH" :value="custInfo.dob">
+  <input type="hidden" name="LANGUAGE_ISO2" :value="custInfo.language_db">
+  <input type="hidden" name="FF_OUTDOORACTIVITIES" :value="(custInfo.prefOutdoorActivities) ? 1 : 0">
+  <input type="hidden" name="FF_DINING" :value="(custInfo.prefDining) ? 1 : 0">
+  <input type="hidden" name="FF_ENTERTAINMENT" :value="(custInfo.prefEntertainment) ? 1 : 0"> 
+  <input type="hidden" name="FF_FAMILY" :value="(custInfo.prefFamily1) ? 1 : 0">  
+  <input type="hidden" name="FF_SKI" :value="(custInfo.prefSki) ? 1 : 0"> 
+  <input type="hidden" name="FF_BEACH" :value="(custInfo.prefBeach) ? 1 : 0"> 
+  <input type="hidden" name="FF_ART_CULTURE" :value="(custInfo.prefArtCulture) ? 1 : 0"> 
+  <input type="hidden" name="FF_SHOPPING" :value="(custInfo.prefShopping) ? 1 : 0"> 
+  <input type="hidden" name="WT_BUSINESS" :value="(custInfo.prefBusiness) ? 1 : 0"> 
+  <input type="hidden" name="WT_PLEASURE" :value="(custInfo.prefPleasure) ? 1 : 0"> 
+  <input type="hidden" name="WT_FAMILY" :value="(custInfo.prefFamily2) ? 1 : 0">  
+  <input type="hidden" name="DD_CLICKED" :value="(custInfo.prefDiscountDen) ? 1 : 0">  
+  <input type="hidden" name="BND_CLICKED" :value="(custInfo.prefBundleSave) ? 1 : 0"> 
+  <input type="hidden" name="FM_CLICKED" :value="(custInfo.prefFrontierMiles) ? 1 : 0"> 
+  <input type="hidden" name="CC_CLICKED" :value="(custInfo.prefFrontierMastercard) ? 1 : 0"> 
+  <!--Programs - Set to 0 to prevent null values in the interest table-->
+  <input type="hidden" name="PROGRAMS_DEALS" :value="(custInfo.prefDeals) ? 1 : 0">  
+  <input type="hidden" name="PROGRAMS_TRAVELTIPS" :value="(custInfo.prefTravelTips) ? 1 : 0"> 
+  <input type="hidden" name="PROGRAMS_FRONTIERNEWS" :value="(custInfo.prefFrontierNews) ? 1 : 0"> 
+  <input type="hidden" name="PROGRAMS_TRAVELPERKS" :value="(custInfo.prefTravelPerks) ? 1 : 0"> 
+  <!--Email Frequency - Set FREQ_ALL to 1 and the rest to 0-->
+  <input type="hidden" name="FREQ_ALL" :value="(custInfo.prefFreqAll) ? 1 : 0">  
+  <input type="hidden" name="FREQ_1XWEEK" :value="(custInfo.prefFreq1xWeek) ? 1 : 0"> 
+  <input type="hidden" name="FREQ_1XMONTH" :value="(custInfo.prefFreq1xMonth) ? 1 : 0"> 
+  <input type="hidden" name="EMAIL_PERMISSION_STATUS_" :value="(custInfo.emailPermissionStatus) ? 'O' : 'I'">
+  <input type="hidden" name="EMAIL_CHECK" :value="(custInfo.updatedEmailCheck) ? 1 : 0">
+ <input type="hidden" name="EMAIL_SHA256_HASH_" value="$lookup(EMAIL_SHA256_HASH_)$">       
+
+    </div>
+    </transition>
+  </form>
+  </div>
+  </div>
+    <!--visa banner-->
+    <div class="visa-banner-wrapper">
+    <div class="visa-banner-container">
+      <div class="visa-banner-item">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><img src="img/barclay_cc_sticky2.png" alt="Frontier Visa"></a>
+      </div>
+      <div class="visa-banner-item mblhd">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><div style="font-size: 8px; color: #d04041; padding:0 .5em; margin:0 auto;"><b>LIMITED TIME OFFER</b></div><p>TAKE TO THE AIR AND EARN <span class="bold fnt-green">50,000</span> BONUS&nbsp;MILES </p></a>
+      </div>
+
+      <div class="visa-banner-item">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><button type="button" class="btn-visa-apply" id="apply" value="apply">APPLY NOW</button></a>
+      </div>
+    </div>
+    </div>
+    <!--/visa banner-->
+</div>
+<!--footer-->
+<footer>
+  <a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup"><img src="img/logo-footer.png" alt="Frontier Airlines" /></a>
+  <div class="footer-links-container">
+    <div>
+    <p><a href="https://www.flyfrontier.com/contact-us/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Contact Us</a> | <a href="https://www.flyfrontier.com/legal/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Legal</a><span class="hide-pipe"> | </span></p>
+    </div>
+    <div>
+    <p><a href="https://www.flyfrontier.com/legal/privacy-policy/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Privacy&nbsp;Policy</a> | <a href="https://www.flyfrontier.com/legal/contract-of-carriage?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Contract&nbsp;of&nbsp;Carriage</a></p>
+    </div>
+  </div>
+  <p class="paddtp32">Copyright &copy; $todayformat(0,yyyy)$ FRONTIER Airlines | All&nbsp;Rights&nbsp;Reserved.</p>
+</footer>     
+<!--/footer-->
+
+</main>
+
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    step: 2,
+    signupToday:true,
+    thanksText:false,
+    errors:[],
+    nameErrors: [],
+    redBorderEmail:false,
+    cityErrors: [],
+    redBorderCity:false,
+    redBorderZip:false,
+    redBorderFirstName: false,
+    redBorderLastName: false,
+// The custInfo data object is used to store all the info on the record for this form. Using the BIF logic we are checking the fields for any existing data and then displaying it in the form where possible.    
+    custInfo: {
+      email:'$lookup(EMAIL_ADDRESS_)$',
+      zipcode:null,
+      firstName:'',
+      lastName:'',
+      city:'',
+      state:'',
+      language:'',
+      language_db:'',
+      prefAirport: '',
+      prefAirportToSave: '',
+      dobMM:'',
+      dobMMNum:'',
+      dobDD:'',
+      dobYY:'',
+      prefOutdoorActivities: false,
+      prefDining: false,
+      prefEntertainment: false,
+      prefFamily1: false,
+      prefSki: false,
+      prefBeach: false,
+      prefArtCulture: false,
+      prefShopping: false,
+      prefBusiness: false,
+      prefPleasure: false,
+      prefFamily2: false,
+      prefDiscountDen: false,
+      prefBundleSave: false,
+      prefFrontierMiles: false,
+      prefFrontierMastercard: false,
+      prefDeals: false,
+      prefTravelTips: false,
+      prefFrontierNews: false,
+      prefTravelPerks: false,
+      prefOutdoorActivities: false,
+      prefFreqAll: true,
+      prefFreq1xWeek: false,
+      prefFreq1xMonth: false,
+      updatedEmailCheck: false,
+      dob:""
+    },
+// airports is a list of aiport codes from the AIRPORT_TABLE SUPP via Airport_List_SQL and will stay updated as the SUPP is updated.        
+    airports: "$lookuprecords(Preference_Center, Airport_List_SQL,LOOKUP,1,AIRPORT_CODES)$",
+    airportCodes: [],
+    dobMM: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    dobDDArray: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    dobYY: [],
+
+  preferredState: ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'],
+  preferredLanguage: ['English', 'Spanish']
+},
+  methods:{
+      back() {
+        if(this.cityErrors.length == false) {
+        window.scrollTo(0,0);
+        setTimeout(() => {this.step--}, 100);
+        // this.step--;
+        }
+      },
+      next() {
+        // this.step++;
+        if(this.cityErrors.length == false) {
+          window.scroll(0,0);
+        setTimeout(() => {this.step++}, 100);
+            }
+          },
+
+      nextName() {
+        // this.step++;
+        if(this.nameErrors.length == false) {
+          window.scroll(0,0);
+        setTimeout(() => {this.step++}, 100);
+          }     
+      },
+
+// This method uses the month and year variables to determine the number of days in the month to display in the drop down menu so that it can accurately be recorded into RI.        
+        maxDay: function(){
+            function daysInMonth(month, year) {
+                return new Date(year, month, 0).getDate();
+              }
+            if (this.custInfo.dobMMNum == '') {
+                var maxDays = 31
+                // this.dobDD = Array.from({length: maxDays}, (v, k) => k+1);
+                this.dobDD = this.dobDDArray.slice(0,maxDays);
+            } else {
+                var maxDays = daysInMonth(this.custInfo.dobMMNum, this.custInfo.dobYY)
+                this.dobDD = this.dobDDArray.slice(0,maxDays);
+            }
+        },
+        checkName:function(e) {
+// This will be used to check that a valid first and last name has been entered and throw an error if trying to submit.          
+          this.nameErrors = [];
+          var regExpr = /^[a-zA-Z0-9 -]*$/;
+          if (this.custInfo.firstName !== '') {        
+            if(!this.custInfo.firstName.match(regExpr)) {
+            this.nameErrors.push("First name error");
+            this.redBorderFirstName = true;
+          } else {
+            this.redBorderFirstName = false;
+            }
+          } else {
+            this.redBorderFirstName = false;
+          }
+
+          if (this.custInfo.lastName !== '') {
+            
+            if(!this.custInfo.lastName.match(regExpr)) {
+             this.nameErrors.push("Last name error");
+              this.redBorderLastName = true;
+            } else {
+              this.redBorderLastName = false;
+            }
+          } else {
+            this.redBorderLastName = false;
+          }
+
+          if(!this.nameErrors.length) return true;
+        },
+
+    checkCity:function(e) {
+// This will be used to check that a valid city name with no special characters has been entered and throw an error if trying to submit.          
+          this.cityErrors = [];
+          if (this.custInfo.city !== '') {        
+            var regExpr = /^[a-zA-Z0-9 -]*$/;
+            if(!this.custInfo.city.match(regExpr)) {
+            this.cityErrors.push("City name error");
+            console.log(this.cityErrors);
+            this.redBorderCity = true;
+          } else {
+            this.redBorderCity = false;
+            }
+          } else {
+            this.redBorderCity = false;
+          }
+
+          if(!this.cityErrors.length) return true;
+        }
+
+    },
+    mounted: function() {
+// Takes the airpors list and splits in by commas and puts in an array so we can loop through in the drop down menu.       
+      this.airportCodes = this.airports.split(",");
+// This will create an array of all year dates from 1900 to the current date minus 18 years so that the drop down menu dates do not need to be updated.
+      var currentDate = new Date().getFullYear() - 18;
+      for (i = 1900; i <= currentDate; i++) {
+       this.dobYY.unshift(i);
+      }
+
+    },
+    updated: function() {
+    
+// This takes the month shorthand value that is captured from the form field drop down menu and converts it into the numeric month vaue to be used to store on the contacts list in a valid format. Only does it when all the date drop downs have been selected to prevent partial dates from trying to be stored.
+    if (this.custInfo.dobYY !== "" && this.custInfo.dobMM !== "" && this.custInfo.dobDD) {
+        if (this.custInfo.dobMM == "Jan") {
+          this.custInfo.dobMMNum = "01"
+      } else if (this.custInfo.dobMM == "Feb") {
+          this.custInfo.dobMMNum = "02"
+      } else if (this.custInfo.dobMM == "Mar") {
+          this.custInfo.dobMMNum = "03"
+      } else if (this.custInfo.dobMM == "Apr") {
+          this.custInfo.dobMMNum = "04"
+      } else if (this.custInfo.dobMM == "May") {
+          this.custInfo.dobMMNum = "05"
+      } else if (this.custInfo.dobMM == "Jun") {
+          this.custInfo.dobMMNum = "06"
+      } else if (this.custInfo.dobMM == "Jul") {
+          this.custInfo.dobMMNum = "07"
+      } else if (this.custInfo.dobMM == "Aug") {
+          this.custInfo.dobMMNum = "08"
+      } else if (this.custInfo.dobMM == "Sep") {
+          this.custInfo.dobMMNum = "09"
+      } else if (this.custInfo.dobMM == "Oct") {
+          this.custInfo.dobMMNum = "10"
+      } else if (this.custInfo.dobMM == "Nov") {
+          this.custInfo.dobMMNum = "11"
+      } else if (this.custInfo.dobMM == "Dec") {
+          this.custInfo.dobMMNum = "12"
+      }
+          this.custInfo.dob = this.custInfo.dobYY+'-'+this.custInfo.dobMMNum+'-'+this.custInfo.dobDD
+      }
+
+// This selects database values for the customers' preferred language
+
+      if (this.custInfo.language == "English") {
+            this.custInfo.language_db = 'en';
+        } else if (this.custInfo.language == "Spanish") {
+            this.custInfo.language_db = 'es';
+        }
+
+
+
+// This converts the airport code / city combo fromt he drop down menu into just the airport code to be saved to PET in RI.
+      if (this.custInfo.prefAirport !== '') {
+      this.custInfo.prefAirportToSave = this.custInfo.prefAirport.substring(0,3);
+      }
+
+  }
+})
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

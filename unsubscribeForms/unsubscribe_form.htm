@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+<!--[if !mso]><!-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!--<![endif]-->
+<title>Frontier Airlines | Unsubscribe</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_reset.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_main4_20191218.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_unsubscribe2.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/banner_201912.css">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+<main id="app" v-cloak>
+<header class="unsub-header">
+  <div>
+  <a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe"><img src="img/logo.png" alt="Frontier Airlines" /></a>
+  </div>
+  <div>
+    <a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe"><p>BOOK A FLIGHT</p></a>
+  </div>
+</header>
+<div class="wrapper">
+<div class="marltrt16">
+  <h1 class="signup">OH NO, IS THIS THE END?</h1>
+  <h2>You have been unsubscribed. But it doesn't have to be this&nbsp;way.</h2>
+</div>
+<div class="bg-grey unsub-container">
+  <div class="unsub-form-container">
+    <div class="form-header">
+    <h3>Did you just need some space?</h3>
+    <p>You can choose how many emails you would like to receive from us instead.*</p>
+    </div>
+    <form method="GET" action="" class="form" id="unsubForm">
+    <!-- <div class="unsub-row">
+      <p>Unsubscribe</p>
+      <div class="col-1">
+        <div class="checkbox-pref">
+          <label for="checkbox_1">
+            <div>
+              <p>I think we need time apart. Please remove me from the mailing&nbsp;list.</p>
+            </div>
+            <input
+              type="checkbox"
+              id="checkbox_1"
+              :checked="custInfo.emailPermissionStatus"
+              @click="unsub()"
+            >
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <hr class="unsub-divider"> -->
+    <div class="unsub-row">
+      <div class="unsub-col-4">
+        <div class="checkbox-pref">
+          <label for="checkbox_2">
+            <div>
+              <p>All</p>
+            </div>
+            <input 
+              type="radio" 
+              id="checkbox_2" 
+              name="all" 
+              :checked="custInfo.prefFreqAll"
+              @click="toggle0()"
+            >
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="checkbox-pref">
+          <label for="checkbox_3">
+            <div>
+              <p>1x/week</p>
+            </div>
+            <input 
+              type="radio" 
+              id="checkbox_3" 
+              name="onceWeek" 
+              :checked="custInfo.prefFreq1xWeek"
+              @click="toggle1()"
+            >
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="checkbox-pref">
+          <label for="checkbox_4">
+            <div>
+              <p>1x/month</p>
+            </div>
+            <input
+              type="radio" 
+              id="checkbox_4" 
+              name="onceMonth" 
+              :checked="custInfo.prefFreq1xMonth"
+              @click="toggle2()"
+            >
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="checkbox-pref">
+          <label for="checkbox_5">
+            <div>
+              <p>None</p>
+            </div>
+            <input
+              type="radio" 
+              id="checkbox_5" 
+              name="onceMonth" 
+              :checked="custInfo.emailPermissionStatus"
+              @click="toggle3()"
+            >
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <p class="unsub-txt-sm">*This setting is only for promotional emails and will not affect your flight itinerary or update messages</p>
+    </div>
+    <hr class="unsub-divider">
+    <div class="unsub-row">
+      <p class="paddbtm21">Update your email address, if required.</p>
+      <label for="email">Email Address</label>
+      <input type="email" name="email" v-model="custInfo.updatedEmail" class="unsub-txt-box" placeholder="$lookup(EMAIL_ADDRESS_)$" />
+    </div>
+    <div class="submit bg-grey">
+      <button type="submit" class="btn-submit" form="unsubForm" id="submit" value="submit">SUBMIT</button>
+    </div>
+     <!--These are all the fields that we are capturing data points on and entering into RI. Using the lookup to the vue data object we can pull in the data we captured in the form-->
+    <input type="hidden" name="ORIGINAL_EMAIL" :value="custInfo.currentEmail">
+    <input type="hidden" name="UPDATED_EMAIL" :value="custInfo.updatedEmail">
+    <input type="hidden" name="RIID" value="$lookup(RIID_)$">
+    <input type="hidden" name="EMAIL_ADDRESS_" :value="this.custInfo.emailToSave">
+    <!--This will be used in the form rules-->
+    <input type="hidden" name="EMAIL_CHECK" :value="(custInfo.updatedEmailCheck) ? 1 : 0">
+     <!--Email Frequency-->
+     <!--These will check for the truthiness of the vue data and log the associated value -->
+    <input type="hidden" name="FREQ_ALL" :value="(custInfo.prefFreqAll) ? 1 : 0">  
+    <input type="hidden" name="FREQ_1XWEEK" :value="(custInfo.prefFreq1xWeek) ? 1 : 0"> 
+    <input type="hidden" name="FREQ_1XMONTH" :value="(custInfo.prefFreq1xMonth) ? 1 : 0"> 
+    <input type="hidden" name="EMAIL_PERMISSION_STATUS_" :value="(custInfo.emailPermissionStatus) ? 'O' : 'I'">
+    <input type="hidden" name="EMAIL_SHA256_HASH_" value="$lookup(EMAIL_SHA256_HASH_)$">
+  </form>
+  </div>
+</div>
+    <!--visa banner-->
+    <div class="visa-banner-wrapper">
+    <div class="visa-banner-container">
+      <div class="visa-banner-item">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><img src="img/barclay_cc_sticky2.png" alt="Frontier Visa"></a>
+      </div>
+      <div class="visa-banner-item mblhd">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><div style="font-size: 8px; color: #d04041; padding:0 .5em; margin:0 auto;"><b>LIMITED TIME OFFER</b></div><p>TAKE TO THE AIR AND EARN <span class="bold fnt-green">50,000</span> BONUS&nbsp;MILES </p></a>
+      </div>
+
+      <div class="visa-banner-item">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><button type="button" class="btn-visa-apply" id="apply" value="apply">APPLY NOW</button></a>
+      </div>
+    </div>
+    </div>
+    <!--/visa banner-->
+</div>
+<!--footer-->
+<footer>
+  <a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe"><img src="img/logo-footer.png" alt="Frontier Airlines" /></a>
+  <div class="footer-links-container">
+    <div>
+    <p><a href="https://www.flyfrontier.com/contact-us/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe" class="link-footer marltrt16">Contact Us</a> | <a href="https://www.flyfrontier.com/legal/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe" class="link-footer marltrt16">Legal</a><span class="hide-pipe"> | </span></p>
+    </div>
+    <div>
+    <p><a href="https://www.flyfrontier.com/legal/privacy-policy/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe" class="link-footer marltrt16">Privacy&nbsp;Policy</a> | <a href="https://www.flyfrontier.com/legal/contract-of-carriage?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=unsubscribe" class="link-footer marltrt16">Contract&nbsp;of&nbsp;Carriage</a></p>
+    </div>
+  </div>
+  <p class="paddtp32">Copyright &copy; $todayformat(0,yyyy)$ FRONTIER Airlines | All&nbsp;Rights&nbsp;Reserved.</p>
+</footer>     
+<!--/footer-->
+</main>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',  
+  data: {
+// The custInfo data object is used to store all the info on the record for this form. Using the BIF logic we are checking the fields for any existing data and then displaying it in the form where possible.    
+    custInfo: {
+      currentEmail:'$lookup(EMAIL_ADDRESS_)$',
+      updatedEmail:'',
+      updatedEmailCheck: false,
+      emailToSave: '$lookup(EMAIL_ADDRESS_)$',
+      emailPermissionStatus:$cond(eq(lookup(EMAIL_PERMISSION_STATUS_),I),false,cond(eq(lookup(EMAIL_PERMISSION_STATUS_),O),true,false))$,
+      prefFreqAll: $cond(eq(lookup(FREQ_ALL),0),false,cond(eq(lookup(FREQ_ALL),1),true,false))$,
+      prefFreq1xWeek: $cond(eq(lookup(FREQ_1XWEEK),0),false,cond(eq(lookup(FREQ_1XWEEK),1),true,false))$,
+      prefFreq1xMonth: $cond(eq(lookup(FREQ_1XMONTH),0),false,cond(eq(lookup(FREQ_1XMONTH),1),true,false))$,
+    }
+  },
+  methods:{
+// These methods are used to toggle between the email freq check boxes so that only one is displayed at a time and if they are all unchecked then it defaults to the checkbox that marks them as being unsubscribed.
+    toggle0: function() {
+      this.custInfo.prefFreqAll = !this.custInfo.prefFreqAll;
+            this.custInfo.prefFreq1xWeek = false;
+            this.custInfo.prefFreq1xMonth = false;
+            this.custInfo.emailPermissionStatus = false;
+        },
+        toggle1: function() {
+      this.custInfo.prefFreq1xWeek = !this.custInfo.prefFreq1xWeek;
+            this.custInfo.prefFreqAll = false;
+            this.custInfo.prefFreq1xMonth = false;
+            this.custInfo.emailPermissionStatus = false;
+        },
+        toggle2: function() {
+      this.custInfo.prefFreq1xMonth = !this.custInfo.prefFreq1xMonth;
+            this.custInfo.prefFreqAll = false;
+            this.custInfo.prefFreq1xWeek = false;
+            this.custInfo.emailPermissionStatus = false;
+        },
+        toggle3: function() {
+      this.custInfo.emailPermissionStatus = !this.custInfo.emailPermissionStatus;
+            this.custInfo.prefFreqAll = false;
+            this.custInfo.prefFreq1xMonth = false;
+            this.custInfo.prefFreq1xWeek = false;
+        },
+    unsub: function() {
+      if (this.custInfo.emailPermissionStatus) {
+              this.custInfo.prefFreqAll = false;
+              this.custInfo.prefFreq1xWeek = false;
+              this.custInfo.prefFreq1xMonth = false;
+              this.custInfo.emailPermissionStatus = false;
+            } else if (!this.custInfo.emailPermissionStatus) {
+              this.custInfo.prefFreqAll = false;
+              this.custInfo.prefFreq1xWeek = false;
+              this.custInfo.prefFreq1xMonth = false;
+              this.custInfo.emailPermissionStatus = true;
+            }
+    }
+  },
+  updated: function() { 
+// This function is used to tell if there is a new email address entered in the update email address text box
+    if (this.custInfo.updatedEmail !== '') {
+          this.custInfo.emailToSave = this.custInfo.updatedEmail
+          this.custInfo.updatedEmailCheck = true;
+      } else {
+        this.custInfo.updatedEmailCheck = false;
+        this.custInfo.emailToSave = this.custInfo.currentEmail
+      }
+// This function is used to default the email freq check boxes to the none option which unsubscribes a customer since this is an unsubscribe form
+
+      if (this.custInfo.emailPermissionStatus == false && this.custInfo.prefFreqAll == false && this.custInfo.prefFreq1xWeek == false && this.custInfo.prefFreq1xMonth == false) {
+        this.custInfo.emailPermissionStatus = true;
+      }   
+
+  }
+});
+</script>
+</body>
+</html>
+
+
+

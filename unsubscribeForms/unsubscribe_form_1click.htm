@@ -1,0 +1,17 @@
+<html>
+<head> <title>Untitled</title></head>
+<body>
+  <form name="unsub">
+<!--Hidden inputs to mark record as opt out and to mark email frequencies to 0-->    
+  <input type="hidden" name="EMAIL_PERMISSION_STATUS_" value='O'>
+  <input type="hidden" name="FREQ_ALL" value='0'>  
+  <input type="hidden" name="FREQ_1XWEEK" value='0'> 
+  <input type="hidden" name="FREQ_1XMONTH" value='0'>
+  <input type="hidden" name="PREF_UNSUB_LAST_SUBMIT" value="$todayformat(0)$"> 
+  </form>
+  <script type="text/javascript">
+ // Auto submit the form   
+    document.unsub.submit();
+</script>
+</body>
+</html> 

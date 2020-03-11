@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+<!--[if !mso]><!-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!--<![endif]-->
+<title>Frontier Airlines | Email Subscribe</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_reset.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_main4_20191218.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/pref_center_email_subscribe_201912.css">
+<link rel="stylesheet" type="text/css" href="https://static.cdn.responsys.net/i2/responsysimages/content/frontiera/banner_201912.css">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+<main id="app" v-cloak>
+<header>
+<a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup"><img src="img/logo.png" alt="Frontier Airlines" class="logo" /></a>
+</header>
+<div class="wrapper">
+<div v-if="step === 1">
+<h1 class="signup">Sign Up Today</h1>
+<h2>Receive special deals on flights, hotels, and&nbsp;more.</h2>
+</div>
+<div v-if="step >= 2">
+<h1 class="signup">THANK YOU FOR SUBSCRIBING!</h1>
+<h2>Let's learn a little more about&nbsp;you...</h2>
+</div>
+    
+    <div class="headline">
+        <a @click="step = 2">
+            <div v-if="step >= 3" class="cursor">
+            <h2 class="clickArea">Please tell us your name <span class="headline-arrow"></span></h2>
+        </div></a>
+        <a @click="step = 3"><div v-if="step >= 4" class="cursor">
+            <h2>Where is your home base? <span class="headline-arrow"></span></h2>
+        </div></a>
+        <a @click="step = 4"><div v-if="step === 5" class="cursor">
+            <h2>What do you do for fun? (select all that apply) <span class="headline-arrow"></span></h2>
+        </div></a>
+    </div>
+    
+    <div class="bg-grey">
+        <div class="progress-bar" v-if="step >= 2">
+            <div class="progress-01" v-if="step === 2"><img src="img/plane.png"></div>
+            <div class="progress-02" v-if="step === 3"><img src="img/plane.png"></div>
+            <div class="progress-03" v-if="step === 4"><img src="img/plane.png"></div>
+            <div class="progress-04" v-if="step === 5"><img src="img/plane.png"></div>
+        </div>
+    <div class="form-container">
+    <form method="GET" action="" class="form" @submit="checkForm" id="prefForm">
+        <div id="module-01" v-if="step === 1">
+            <div class="form-row">
+                <div class="hd-col">&nbsp;</div>
+                <div class="col-1">
+                    <label for="email">Email Address*</label>
+                    <input type="email" name="EMAIL_ADDRESS_" v-model="custInfo.email" placeholder="jane.smith@email.com" :class="{'errorBorder': (redBorderEmail)}" />
+                </div>
+                <div class="col-1">
+                    <label for="zipcode">Zip Code*</label>
+                    <input type="text" name="POSTAL_CODE_" v-model="custInfo.zipcode" placeholder="00000" pattern="[0-9]{5}" title="Five digit zip code" :class="{'errorBorder': (redBorderZip)}" />
+                </div>
+                <div class="hd-col">&nbsp;</div>
+            </div>
+            
+            <div class="form-row">
+                <div class="hd-col">&nbsp;</div>
+                <div>
+                    <p class="required-copy">* Indicates required field</p>
+                </div>
+                <div class="hd-col">&nbsp;</div>
+            </div>
+            <div class="form-row3">
+                <div class="hd-col" class="hd-col">&nbsp;</div>
+                    <transition name="fadeIn">
+                        <div v-if="errors.length">
+                        <p class="error-message">These fields are required for us to work together:
+                            <ul>
+                              <li v-for="error in errors" class="error-message">{{ error }}</li>
+                            </ul>
+                        </p>
+                        </div>
+                    </transition>
+                <div class="hd-col">&nbsp;</div>
+            </div>
+            <div class="btn paddtp32 paddbtm60">
+                <!-- <button @click.prevent="next()" type="submit" class="btn-next" id="next" value="next">SUBMIT</button> -->
+                <button type="submit" class="btn-submit" id="next" value="next">SUBMIT</button>
+            </div>
+            <div class="banner-module paddbtm90">
+                <div class="banner-item">
+                    <img src="img/icn-01.png" />
+                    <h4>Choices.</h4>
+                    <p>Only pay for what's important to you.</p>
+                </div>
+                <div class="banner-item">
+                    <img src="img/icn-02.png" />
+                    <h4>Save and Bundle!</h4>
+                    <p>Affordable frills, guaranteed, with our exclusive bundle.</p>
+                </div>
+                <div class="banner-item">
+                    <img src="img/icn-03.png" />
+                    <h4>Low Fares!</h4>
+                    <p>No one offers better value for your money.</p>
+                </div>
+                <div class="banner-item">
+                    <img src="img/icn-04.png" />
+                    <h4>It's Easy!</h4>
+                    <p>Whether on our site or our mobile app we make it easy as 1-2-3.</p>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="RECORD_SOURCE" value="web_form">
+        <input type="hidden" name="PREF_EMAIL_LAST_SUBMIT" value="$todayformat(0)$">
+    </form>
+    </div>
+    </div>
+    <!--visa banner-->
+    <div class="visa-banner-wrapper">
+    <div class="visa-banner-container">
+      <div class="visa-banner-item">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><img src="img/barclay_cc_sticky2.png" alt="Frontier Visa"></a>
+      </div>
+      <div class="visa-banner-item mblhd">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><div style="font-size: 8px; color: #d04041; padding:0 .5em; margin:0 auto;"><b>LIMITED TIME OFFER</b></div><p>TAKE TO THE AIR AND EARN <span class="bold fnt-green">50,000</span> BONUS&nbsp;MILES </p></a>
+      </div>
+
+      <div class="visa-banner-item">
+        <a href="http://www.barclaycardus.com/apply/Landing.action?campaignId=2665&cellNumber=24&referrerid=PTREMPREFCEN"><button type="button" class="btn-visa-apply" id="apply" value="apply">APPLY NOW</button></a>
+      </div>
+    </div>
+    </div>
+    <!--/visa banner-->
+</div>
+<!--footer-->
+<footer>
+  <a href="https://www.flyfrontier.com/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup"><img src="img/logo-footer.png" alt="Frontier Airlines" /></a>
+  <div class="footer-links-container">
+    <div>
+    <p><a href="https://www.flyfrontier.com/contact-us/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Contact Us</a> | <a href="https://www.flyfrontier.com/legal/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Legal</a><span class="hide-pipe"> | </span></p>
+    </div>
+    <div>
+    <p><a href="https://www.flyfrontier.com/legal/privacy-policy/?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Privacy&nbsp;Policy</a> | <a href="https://www.flyfrontier.com/legal/contract-of-carriage?sha_hash=$lookup(EMAIL_SHA256_HASH_)$&utm_medium=email&utm_source=signup" class="link-footer marltrt16">Contract&nbsp;of&nbsp;Carriage</a></p>
+    </div>
+  </div>
+  <p class="paddtp32">Copyright &copy; $todayformat(0,yyyy)$ FRONTIER Airlines | All&nbsp;Rights&nbsp;Reserved.</p>
+</footer>     
+<!--/footer-->
+
+</main>
+<script type="text/javascript">
+var app = new Vue({
+    el: '#app',
+    data: {
+        step: 1,
+        signupToday:true,
+        thanksText:false,
+        errors:[],
+        redBorderEmail:false,
+        redBorderZip:false,
+// The custInfo data object is used to store all the info on the record for this form. Using the BIF logic we are checking the fields for any existing data and then displaying it in the form where possible.          
+        custInfo: {
+            email:null,
+            zipcode:null
+        }
+    },
+    methods:{
+        back() {
+            window.scrollTo(0,0);
+            setTimeout(() => {this.step--}, 100);
+          // this.step--;
+        },
+        next() {
+          // this.step++;
+          window.scroll(0,0);
+          setTimeout(() => {this.step++}, 100);
+        },
+
+        checkForm:function(e) {
+// This will be used to check that a valid email address and zip code has been entered and throw an error if trying to submit.          
+          this.errors = [];
+          if(!this.custInfo.email) {
+           this.errors.push("Your Email Address");
+            var expr = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            this.redBorderEmail = true;
+          } else {
+            this.redBorderEmail = false;
+          }
+
+          if(!this.custInfo.zipcode){
+           this.errors.push("Your Zip Code");
+            this.redBorderZip = true;
+          } else {
+            this.redBorderZip = false;
+          }
+
+          if(!this.errors.length) return true;
+          e.preventDefault();
+        }
+    },
+})
+</script>
+</body>
+</html>
+
+
+
